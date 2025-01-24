@@ -1,0 +1,15 @@
+[
+  {
+    "_dataType" : "demo"
+  },
+  {
+    "_entity" :"PartyType",
+    "partyTypeId" : "PERSON",
+    "description" : "Person"
+  },
+  {
+    "_entity": "PartyType",
+    "partyTypeId" : "ORGANIZATION",
+    "description" : "Organization"
+  }
+]
