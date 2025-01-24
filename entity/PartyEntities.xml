@@ -30,4 +30,17 @@
 
         <relationship type="one" related="partyEntities.party.Party"/>
     </entity>
+    
+    <entity entity-name="RoleType" package="partyEntities.party">
+        <field name="roleTypeId" type="id" is-pk="true"/>
+        <field name="description" type="text-short"/>
+    </entity>
+
+    <entity entity-name="PartyRole" package="partyEntities.party">
+        <field name="partyId" type="id" is-pk="true"/>
+        <field name="roleTypeId" type="text-short" is-pk="true"/>
+
+        <relationship type="one" related="partyEntities.party.RoleType"/>
+        <relationship type="one" related="partyEntities.party.Party"/>
+    </entity>
 </entities>
