@@ -36,5 +36,10 @@
     "_entity" : "ContactMechType",
     "contactMechTypeId" : "TELECOM_NUMBER",
     "description" : "TelecomNumber"
+  },
+  {
+    "_entity" : "ContactMechType",
+    "contactMechTypeId" : "EMAIL_ADDRESS",
+    "description" : "EmailAddress"
   }
 ]

@@ -1,0 +1,176 @@
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/service-definition-3.xsd">
+    
+    <service verb="create" noun="Party" type="entity-auto">
+        <in-parameters>
+            <auto-parameters>
+                <exclude field-name="lastUpdatedStamp"/>
+            </auto-parameters>
+        </in-parameters>
+        <out-parameters>
+            <auto-parameters/>
+        </out-parameters>
+    </service>
+
+    <service verb="create" noun="Person" type="entity-auto">
+        <in-parameters>
+            <auto-parameters>
+                <exclude field-name="lastUpdatedStamp"/>
+            </auto-parameters>
+        </in-parameters>
+        <out-parameters>
+            <auto-parameters/>
+        </out-parameters>
+    </service>
+
+    <service verb="create" noun="Organization" type="entity-auto">
+        <in-parameters>
+            <auto-parameters>
+                <exclude field-name="lastUpdatedStamp"/>
+            </auto-parameters>
+        </in-parameters>
+        <out-parameters>
+            <auto-parameters/>
+        </out-parameters>
+    </service>
+    
+    <service verb="create" noun="CreatePerson">
+        <in-parameters>
+            <auto-parameters entity-name="Party" required="true" include="pk">
+                <exclude field-name="lastUpdatedStamp"/>
+            </auto-parameters>
+            <auto-parameters entity-name="Person" required="true" include="nonpk">
+                <exclude field-name="lastUpdatedStamp"/>
+            </auto-parameters>
+        </in-parameters>
+        <actions>
+
+            <set field="partyTypeId" value="PERSON"/>
+            <service-call name="create#Party" in-map="context" out-map="context"/>
+            <service-call name="create#Person" in-map="context" out-map="context"/>
+        </actions>
+    </service>
+
+    <service verb="create" noun="CreateOrganization">
+        <in-parameters>
+            <auto-parameters entity-name="Party" required="true" include="pk">
+                <exclude field-name="lastUpdatedStamp"/>
+            </auto-parameters>
+            <auto-parameters entity-name="Organization" required="true" include="nonpk">
+                <exclude field-name="lastUpdatedStamp"/>
+            </auto-parameters>
+        </in-parameters>
+        <actions>
+            <set field="partyTypeId" value="ORGANIZATION"/>
+            <service-call name="create#Party" in-map="context" out-map="context"/>
+            <service-call name="create#Organization" in-map="context" out-map="context"/>
+        </actions>
+    </service>
+
+    <service verb="create" noun="PartyRole" type="entity-auto">
+        <in-parameters>
+            <auto-parameters entity-name="PartyRole">
+                <exclude field-name="lastUpdatedStamp"/>
+            </auto-parameters>
+        </in-parameters>
+        <out-parameters>
+            <auto-parameters>
+                <exclude field-name="lastUpdatedStamp"/>
+            </auto-parameters>
+        </out-parameters>
+    </service>
+
+    <service verb="create" noun="ContactMech" type="entity-auto">
+        <in-parameters>
+            <auto-parameters entity-name="ContactMech">
+                <exclude field-name="lastUpdatedStamp"/>
+            </auto-parameters>
+        </in-parameters>
+        <out-parameters>
+            <auto-parameters>
+                <exclude field-name="lastUpdatedStamp"/>
+            </auto-parameters>
+        </out-parameters>
+    </service>
+
+    <service verb="create" noun="TelecomNumber" type="entity-auto">
+        <in-parameters>
+            <auto-parameters entity-name="TelecomNumber">
+                <exclude field-name="lastUpdatedStamp"/>
+            </auto-parameters>
+        </in-parameters>
+        <out-parameters>
+            <auto-parameters>
+                <exclude field-name="lastUpdatedStamp"/>
+            </auto-parameters>
+        </out-parameters>
+    </service>
+
+    <service verb="create" noun="PostalAddress" type="entity-auto">
+        <in-parameters>
+            <auto-parameters entity-name="PostalAddress">
+                <exclude field-name="lastUpdatedStamp"/>
+            </auto-parameters>
+        </in-parameters>
+        <out-parameters>
+            <auto-parameters>
+                <exclude field-name="lastUpdatedStamp"/>
+            </auto-parameters>
+        </out-parameters>
+    </service>
+
+    <service verb="create" noun="CreatePostalAddress">
+        <in-parameters>
+            <auto-parameters entity-name="ContactMech" include="pk">
+                <exclude field-name="lastUpdatedStamp"/>
+            </auto-parameters>
+            <auto-parameters entity-name="PostalAddress" include="nonpk">
+                <exclude field-name="lastUpdatedStamp"/>
+            </auto-parameters>
+        </in-parameters>
+        <actions>
+            <set field="contactMechTypeId" value="POSTAL_ADDRESS"/>
+            <service-call name="create#ContactMech" in-map="context" out-map="context"/>
+            <service-call name="create#PostalAddress" in-map="context" out-map="context"/>
+        </actions>
+    </service>
+
+    <service verb="create" noun="CreateTelecomNumber">
+        <in-parameters>
+            <auto-parameters entity-name="ContactMech" include="pk">
+                <exclude field-name="lastUpdatedStamp"/>
+            </auto-parameters>
+            <auto-parameters entity-name="TelecomNumber" include="nonpk">
+                <exclude field-name="lastUpdatedStamp"/>
+            </auto-parameters>
+        </in-parameters>
+        <actions>
+            <set field="contactMechTypeId" value="TELECOM_NUMBER"/>
+            <service-call name="create#ContactMech" in-map="context" out-map="context"/>
+            <service-call name="create#TelecomNumber" in-map="context" out-map="context"/>
+        </actions>
+    </service>
+
+    <service verb="create" noun="CreateEmailAddress">
+        <in-parameters>
+            <auto-parameters entity-name="ContactMech">
+                <exclude field-name="contactMechTypeId"/>
+                <exclude field-name="lastUpdatedStamp"/>
+            </auto-parameters>
+        </in-parameters>
+        <actions>
+            <set field="contactMechTypeId" value="EMAIL_ADDRESS"/>
+            <service-call name="create#ContactMech" in-map="context" out-map="context"/>
+        </actions>
+    </service>
+
+    <service verb="create" noun="PartyContactMech" type="entity-auto">
+        <in-parameters>
+            <auto-parameters entity-name="PartyContactMech">
+                <exclude field-name="lastUpdatedStamp"/>
+            </auto-parameters>
+        </in-parameters>
+        <out-parameters>
+            <auto-parameters/>
+        </out-parameters>
+    </service>
+</services>

@@ -78,6 +78,21 @@
         <field name="postalCode" type="text-short"/>
         <relationship type="one" related="partyEntities.party.contact.ContactMech"/>
     </entity>
+    
+    <entity entity-name="ContactMechPurpose" package="partyEntities.party.contact">
+        <field name="contactMechPurposeId" type="id" is-pk="true"/>
+    </entity>
+    
+    <entity entity-name="PartyContactMech" package="partyEntities.party.contact">
+        <field name="partyId" type="id" is-pk="true"/>
+        <field name="contactMechId" type="id" is-pk="true"/>
+        <field name="contactMechPurposeId" type="id" is-pk="true"/>
+        <field name="fromDate" type="date" is-pk="true"/>
+        <field name="thruDate" type="text-short"/>
+        <relationship type="one" related="partyEntities.party.Party"/>
+        <relationship type="one" related="partyEntities.party.contact.ContactMech"/>
+        <relationship type="one" related="partyEntities.party.contact.ContactMechPurpose"/>
+    </entity>
 </entities>
 
 <!--        contactMechId-->
