@@ -26,5 +26,15 @@
     "_entity": "RoleType",
     "roleTypeId" : "CUSTOMER",
     "description" : "Customer"
+  },
+  {
+    "_entity" : "ContactMechType",
+    "contactMechTypeId" : "POSTAL_ADDRESS",
+    "description" : "PostalAddress"
+  },
+  {
+    "_entity" : "ContactMechType",
+    "contactMechTypeId" : "TELECOM_NUMBER",
+    "description" : "TelecomNumber"
   }
 ]
