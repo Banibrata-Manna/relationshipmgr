@@ -9,7 +9,7 @@
         </actions>
         <default-response type="screen-last-noparam"/>
     </transition>
-
+    
     <transition name="orgCreate">
         <service-call name="PartyAndContactService.create#CreateOrganization" in-map="context" out-map="context"/>
         <default-response type="screen-last-noparam"/>
