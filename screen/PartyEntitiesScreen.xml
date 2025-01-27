@@ -6,16 +6,92 @@
         <actions>
             <set field="partyTypeEnumId" value="PERSON"/>
             <service-call name="create#partyEntities.party.Party" in-map="context" out-map="context"/>
-            <service-call name="create#partyEntities.party.PartyPerson" in-map="context" out-map="context"/>
+            <service-call name="create#partyEntities.party.Person" in-map="context" out-map="context"/>
         </actions>
         <default-response url="."/>
     </transition>
+
+    <transition name="createOrganization">
+        <actions>
+            <set field="partyTypeEnumId" value="ORGANIZATION"/>
+            <service-call name="create#partyEntities.party.Party" in-map="context" out-map="context"/>
+            <service-call name="create#partyEntities.party.Organization" in-map="context" out-map="context"/>
+        </actions>
+        <default-response url="."/>
+    </transition>
+
+    <transition name="addRoleToParty">
+        <actions>
+            <service-call name="create#partyEntities.party.PartyRole" in-map="context" out-map="context"/>
+        </actions>
+        <default-response url="."/>
+    </transition>
+
+    <transition name="addTeleContactMech">
+        <actions>
+            <set field="contactMechTypeId" value="TELECOM_NUMBER"/>
+            <service-call name="create#partyEntities.party.contact.ContactMech" in-map="context" out-map="context"/>
+            <service-call name="create#partyEntities.party.contact.TelecomNumber" in-map="context" out-map="context"/>
+        </actions>
+        <default-response url="."/>
+    </transition>
+
+    <transition name="addPostalContactMech">
+        <actions>
+            <set field="contactMechTypeEnumId" value="POSTAL_ADDRESS"/>
+            <service-call name="create#partyEntities.party.contact.ContactMech" in-map="context" out-map="context"/>
+            <service-call name="create#partyEntities.party.contact.PostalAddress" in-map="context" out-map="context"/>
+        </actions>
+        <default-response url="."/>
+    </transition>
+
+    <transition name="addPartyContactMech">
+        <actions>
+            <set field="contactMechTypeEnumId" value="POSTAL_ADDRESS"/>
+            <service-call name="create#partyEntities.party.contact.PartyContactMech" in-map="context" out-map="context"/>
+        </actions>
+        <default-response url="."/>
+    </transition>
+
     <widgets>
         <container-dialog id="person" button-text="createPerson">
-            <form-single name="Person" transition="createPerson">
+            <form-single name="PersonForm" transition="createPerson">
                 <auto-fields-entity entity-name="partyEntities.party.Party" field-type="edit" include="pk"/>
                 <auto-fields-entity entity-name="partyEntities.party.Person" field-type="edit" include="nonpk"/>
                 <field name="submitButton"><default-field title="Create"><submit/></default-field></field>
+            </form-single>
+        </container-dialog>
+        <container-dialog id="organizationContainerDialog" button-text="createOrganization">
+            <form-single name="OrganizationForm" transition="createOrganization">
+                <auto-fields-entity entity-name="partyEntities.party.Party" field-type="edit" include="pk"/>
+                <auto-fields-entity entity-name="partyEntities.party.Organization" field-type="edit" include="nonpk"/>
+                <field name="submitButton"><default-field title="Create"><submit/></default-field></field>
+            </form-single>
+        </container-dialog>
+        <container-dialog id="addRoleDialog" button-text="AddRoleToParty">
+            <form-single name="RoleForm" transition="addRoleToParty">
+                <auto-fields-entity entity-name="partyEntities.party.PartyRole" field-type="edit" include="pk"/>
+                <field name="submitButton"><default-field title="Add Role"><submit/></default-field></field>
+            </form-single>
+        </container-dialog>
+        <container-dialog id="teleContactMechDialog" button-text="AddTeleContactMech">
+            <form-single name="ContactMechForm" transition="addTeleContactMech">
+                <auto-fields-entity entity-name="partyEntities.party.contact.ContactMech" field-type="edit" include="pk"/>
+                <auto-fields-entity entity-name="partyEntities.party.contact.TelecomNumber" field-type="edit" include="nonpk"/>
+                <field name="submitButton"><default-field title="Create Telecom"><submit/></default-field></field>
+            </form-single>
+        </container-dialog>
+        <container-dialog id="postalContactMechDialog" button-text="AddPostalContactMech">
+            <form-single name="PosContactMechForm" transition="addPostalContactMech">
+                <auto-fields-entity entity-name="partyEntities.party.contact.ContactMech" field-type="edit" include="pk"/>
+                <auto-fields-entity entity-name="partyEntities.party.contact.PostalAddress" field-type="edit" include="nonpk"/>
+                <field name="submitButton"><default-field title="Create Postal"><submit/></default-field></field>
+            </form-single>
+        </container-dialog>
+        <container-dialog id="partyContactMechDialog" button-text="AddPartyContactMech">
+            <form-single name="PartyContactMechForm" transition="addPartyContactMech">
+                <auto-fields-entity entity-name="partyEntities.party.contact.PartyContactMech" field-type="edit" include="pk"/>
+                <field name="submitButton"><default-field title="PartyContactMech"><submit/></default-field></field>
             </form-single>
         </container-dialog>
     </widgets>
